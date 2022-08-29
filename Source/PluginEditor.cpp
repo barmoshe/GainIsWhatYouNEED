@@ -15,7 +15,8 @@ GainIsWhatYouNEEDAudioProcessorEditor::GainIsWhatYouNEEDAudioProcessorEditor (Ga
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (300, 200);
+    setSize (100, 200);
+    //sliderAttach=new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.treeState, "gain", gainSlider);
     gainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 25);
     gainSlider.setRange(0.0, 1.0);

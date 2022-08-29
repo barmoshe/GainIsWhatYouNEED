@@ -19,9 +19,12 @@ GainIsWhatYouNEEDAudioProcessor::GainIsWhatYouNEEDAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+                        treeState(*this, nullptr)
 #endif
 {
+//    juce::NormalisableRange<float> gainRange (0.0,1.0);
+   // treeState.createAndAddParameter("gain", "gain", "gain", gainRange,0.5, nullptr, nullptr);
 }
 
 GainIsWhatYouNEEDAudioProcessor::~GainIsWhatYouNEEDAudioProcessor()
@@ -93,7 +96,7 @@ void GainIsWhatYouNEEDAudioProcessor::changeProgramName (int index, const juce::
 //==============================================================================
 void GainIsWhatYouNEEDAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    rawVolume=0.015;
+    rawVolume=0.5;
 
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
