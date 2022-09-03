@@ -15,11 +15,12 @@ GainIsWhatYouNEEDAudioProcessorEditor::GainIsWhatYouNEEDAudioProcessorEditor (Ga
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
+    sliderAttach=std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState,"gain",gainSlider);
     setSize (100, 200);
     //sliderAttach=new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.treeState, "gain", gainSlider);
     gainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 25);
-    gainSlider.setRange(0.0, 1.0);
+    gainSlider.setRange(-48.0, 0.0);
     gainSlider.addListener(this);
     addAndMakeVisible(gainSlider);
 }
@@ -35,7 +36,7 @@ GainIsWhatYouNEEDAudioProcessorEditor::~GainIsWhatYouNEEDAudioProcessorEditor()
 void GainIsWhatYouNEEDAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
+ 
     gainSlider.setBounds(getLocalBounds());
 }
 

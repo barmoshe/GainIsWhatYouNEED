@@ -20,11 +20,11 @@ GainIsWhatYouNEEDAudioProcessor::GainIsWhatYouNEEDAudioProcessor()
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
                        ),
-                        treeState(*this, nullptr)
+    treeState(*this,nullptr,"G",{std::make_unique<juce::AudioParameterFloat> ("gain","gain",-48.0f,0.0f,-15.0f)})
 #endif
 {
-//    juce::NormalisableRange<float> gainRange (0.0,1.0);
-   // treeState.createAndAddParameter("gain", "gain", "gain", gainRange,0.5, nullptr, nullptr);
+//    juce::NormalisableRange<float> gainRange (0.0,1.0);OLDJUCE
+   // treeState.createAndAddParameter("gain", "gain", "gain", gainRange,0.5, nullptr, nullptr);OLDJUCE
 }
 
 GainIsWhatYouNEEDAudioProcessor::~GainIsWhatYouNEEDAudioProcessor()
@@ -154,7 +154,7 @@ void GainIsWhatYouNEEDAudioProcessor::processBlock (juce::AudioBuffer<float>& bu
         auto* channelData = buffer.getWritePointer (channel);
 
         for (int sample=0; sample<buffer.getNumSamples(); sample++) {
-            channelData[sample]=buffer.getSample(channel, sample)*rawVolume;
+            channelData[sample]=buffer.getSample(channel, sample)*juce::Decibels::decibelsToGain(rawVolume);
         }    }
 }
 

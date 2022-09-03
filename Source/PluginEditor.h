@@ -1,10 +1,10 @@
 /*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+ This file contains the basic framework code for a JUCE plugin editor.
+ 
+ ==============================================================================
+ */
 
 #pragma once
 
@@ -13,14 +13,14 @@
 
 //==============================================================================
 /**
-*/
+ */
 class GainIsWhatYouNEEDAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                                public juce::Slider::Listener
+public juce::Slider::Listener
 {
 public:
     GainIsWhatYouNEEDAudioProcessorEditor (GainIsWhatYouNEEDAudioProcessor&);
     ~GainIsWhatYouNEEDAudioProcessorEditor() override;
-
+    
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
@@ -32,7 +32,7 @@ private:
     GainIsWhatYouNEEDAudioProcessor& audioProcessor;
     juce::Slider gainSlider;
     public  :
-    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttach;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainIsWhatYouNEEDAudioProcessorEditor)
 };
